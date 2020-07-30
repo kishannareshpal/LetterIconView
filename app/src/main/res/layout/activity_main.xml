@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".MainActivity">
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:useDefaultMargins="true"
+        android:columnCount="5">
+
+        <com.kishannareshpal.lettericonview.LetterIconView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            app:liv_letters="A"/>
+
+        <com.kishannareshpal.lettericonview.LetterIconView
+            android:layout_width="63dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            app:liv_letters="B" />
+
+        <com.kishannareshpal.lettericonview.LetterIconView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            app:liv_letters="C" />
+
+        <com.kishannareshpal.lettericonview.LetterIconView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            app:liv_letters="D" />
+
+        <com.kishannareshpal.lettericonview.LetterIconView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            app:liv_letters="E" />
+
+        <com.kishannareshpal.lettericonview.LetterIconView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            app:liv_letters="F" />
+
+        <com.kishannareshpal.lettericonview.LetterIconView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            app:liv_letters="G" />
+
+        <com.kishannareshpal.lettericonview.LetterIconView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            app:liv_letters="H" />
+
+        <com.kishannareshpal.lettericonview.LetterIconView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            app:liv_letters="I" />
+
+        <com.kishannareshpal.lettericonview.LetterIconView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            app:liv_letters="J" />
+
+        <com.kishannareshpal.lettericonview.LetterIconView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            app:liv_letters="K" />
+
+        <com.kishannareshpal.lettericonview.LetterIconView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            app:liv_letters="L" />
+
+        <com.kishannareshpal.lettericonview.LetterIconView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            app:liv_letters="M" />
+
+        <com.kishannareshpal.lettericonview.LetterIconView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            app:liv_letters="N" />
+
+        <com.kishannareshpal.lettericonview.LetterIconView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            app:liv_letters="O" />
+
+        <com.kishannareshpal.lettericonview.LetterIconView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            app:liv_letters="P" />
+
+        <com.kishannareshpal.lettericonview.LetterIconView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            app:liv_letters="Q" />
+
+        <com.kishannareshpal.lettericonview.LetterIconView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            app:liv_letters="R" />
+
+        <com.kishannareshpal.lettericonview.LetterIconView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            app:liv_letters="S" />
+
+        <com.kishannareshpal.lettericonview.LetterIconView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            app:liv_letters="T" />
+
+        <com.kishannareshpal.lettericonview.LetterIconView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            app:liv_letters="U" />
+
+        <com.kishannareshpal.lettericonview.LetterIconView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            app:liv_letters="V" />
+
+        <com.kishannareshpal.lettericonview.LetterIconView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            app:liv_letters="W" />
+
+        <com.kishannareshpal.lettericonview.LetterIconView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            app:liv_letters="X" />
+
+        <com.kishannareshpal.lettericonview.LetterIconView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            app:liv_letters="Y" />
+
+        <com.kishannareshpal.lettericonview.LetterIconView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            app:liv_letters="Z" />
+
+    </GridLayout>
+
+</LinearLayout>
