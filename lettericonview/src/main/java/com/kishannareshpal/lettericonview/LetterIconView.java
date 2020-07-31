@@ -13,14 +13,15 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.ColorUtils;
 
 public class LetterIconView extends View {
 
     // Declare Utils
     private Context ctx;
-
     private String[] colors; // list of colors which indexes the english alphabet.
 
     private RectF backgroundRect;
@@ -33,6 +34,38 @@ public class LetterIconView extends View {
     private int backgroundColor; // the primary background color.
     private Boolean isGradient; // if we should use gradient or not.
     private String letters; // the letters. Will only show the first two letters if more provided.
+
+
+    // Public Methods
+
+    /**
+     * Change the shape of the view.
+     *
+     * @see Shape for possible shapes
+     * @param shape the shape you want to change to.
+     * @return ignore
+     */
+    public LetterIconView shape(Shape shape) {
+        this.shape = shape;
+        invalidate();
+        return this;
+    }
+
+    public LetterIconView letters(String letters) {
+        changeLetters(letters);
+        invalidate();
+        return this;
+    }
+
+
+    private void changeLetters(String letters) {
+        if (letters == null || letters.isEmpty()) return;
+
+        if (letters.length() > 2) {
+            letters = letters.substring(0, 2);
+        }
+        this.letters = capitalizeString(letters);
+    }
 
 
     public LetterIconView(Context context) {
@@ -88,14 +121,7 @@ public class LetterIconView extends View {
 
         // Setup the attributes.
         // Make sure that we only show a maximum of two letters.
-        if (letters != null) {
-            if (letters.length() > 2) {
-                letters = letters.substring(0, 2);
-            }
-            letters = capitalizeString(letters);
-        } else {
-            letters = "";
-        }
+        changeLetters(letters);
 
         // If no color is set, then use the color according to the first letter of the letters.
         // otherwise, use the color that was set.
@@ -134,6 +160,10 @@ public class LetterIconView extends View {
         }
     }
 
+
+
+
+
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
@@ -142,6 +172,10 @@ public class LetterIconView extends View {
             linearGradient = new LinearGradient(0, w, 0, 0, gradientColors, null, Shader.TileMode.CLAMP);
         }
     }
+
+
+
+
 
     @Override
     protected void onDraw(Canvas canvas) {

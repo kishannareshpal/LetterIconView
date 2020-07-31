@@ -1,6 +1,6 @@
 package com.kishannareshpal.lettericonview;
 
-enum Shape {
+public enum Shape {
 
     SQUARE(0),
     ROUNDED_SQUARE(1),
