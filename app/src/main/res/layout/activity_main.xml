@@ -22,7 +22,7 @@
             app:liv_letters="A"/>
 
         <com.kishannareshpal.lettericonview.LetterIconView
-            android:layout_width="63dp"
+            android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_centerInParent="true"
             app:liv_letters="B" />
