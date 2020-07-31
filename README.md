@@ -1,6 +1,6 @@
 # 🆎 LetterIconView 
 
-[![API 14](https://img.shields.io/badge/API-14%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=14) [![Download](https://api.bintray.com/packages/kishannareshpal/maven/lettericonview/images/download.svg?version=1.0.0) ](https://bintray.com/kishannareshpal/maven/lettericonview/1.0.0/link)
+[![API 14](https://img.shields.io/badge/API-14%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=14) [![Download](https://api.bintray.com/packages/kishannareshpal/maven/lettericonview/images/download.svg?version=1.1.0) ](https://bintray.com/kishannareshpal/maven/lettericonview/1.1.0/link)
 
 LetteredIconView is an android view library to show a letter inside a shape as a view.
 
@@ -47,6 +47,15 @@ Result: <br>
     app:liv_letters // characters to show inside the shape. (Default: "" – EMPTY)
     // Note: the letters text color will be automatically set to either Light or a Dark color based on the liv_backgroundColor that is set.
         
+```
+
+### Methods
+```java
+    
+    LetterIconView liv = findViewById(...)
+    liv.shape(Shape shape) // to change the icon shape {@see LetterIconView.Shape} enum class
+    liv.letters(String letters) // to change the text inside the icon view. Note that only the first two letters of the string will be shown.
+    
 ```
 
 
