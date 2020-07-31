@@ -5,7 +5,6 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Shader;
@@ -186,7 +185,7 @@ public class LetterIconView extends View {
     /**
      * Generate black or white color for text according to the darkness of the primary color.
      *
-     * @return {@link Color#WHITE} if the primary color is dark, otherwise {@link Color#BLACK} if it's light.
+     * @return white color if the primary color is dark, otherwise very dark grk if it's light.
      */
     @ColorInt
     private int autoTextColor() {
