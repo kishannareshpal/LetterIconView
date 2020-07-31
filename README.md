@@ -56,7 +56,7 @@ Add it via Gradle:
 ```gradle
     dependencies {
         // ...
-        implementation 'com.kishannareshpal:superdialog:<version>'
+        implementation 'com.kishannareshpal:lettericonview:<version>'
         // ...
     }
 ```
