@@ -1,6 +1,6 @@
 # 🆎 LetterIconView 
 
-[![API 14](https://img.shields.io/badge/API-14%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=14) [![Download](https://api.bintray.com/packages/kishannareshpal/maven/lettericonview/images/download.svg?version=1.1.0) ](https://bintray.com/kishannareshpal/maven/lettericonview/1.1.0/link)
+[![API 14](https://img.shields.io/badge/API-14%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=14) [![Download](https://api.bintray.com/packages/kishannareshpal/maven/lettericonview/images/download.svg?version=1.2.0) ](https://bintray.com/kishannareshpal/maven/lettericonview/1.2.0/link)
 
 LetteredIconView is an android view library to show a letter inside a shape as a view.
 
