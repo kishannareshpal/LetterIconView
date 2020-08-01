@@ -16,22 +16,16 @@
         android:gravity="center">
 
         <com.kishannareshpal.lettericonview.LetterIconView
-            android:id="@+id/liv_a"
+            android:id="@+id/letterIconView"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_centerInParent="true"
-            app:liv_letters="A"/>
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Click Me" />
+            app:liv_backgroundColor="#fff000"
+            app:liv_letters="🌮" />
 
         <EditText
             android:id="@+id/et"
-            android:layout_width="match_parent"
+            android:layout_width="240dp"
             android:layout_height="wrap_content"
             />
 

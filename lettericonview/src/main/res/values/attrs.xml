@@ -5,10 +5,12 @@
         <attr name="liv_backgroundColor" format="color" />
         <attr name="liv_letters" format="string" />
         <attr name="liv_isGradient" format="boolean" />
+        <attr name="liv_cornerRadius" format="float" />
         <attr name="liv_shape" format="enum">
             <enum name="square" value="0"/>
             <enum name="round_square" value="1"/>
             <enum name="circle" value="2"/>
+            <enum name="custom_radius" value="3"/>
         </attr>
     </declare-styleable>
 

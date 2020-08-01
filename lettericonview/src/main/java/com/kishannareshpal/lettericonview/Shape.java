@@ -4,7 +4,8 @@ public enum Shape {
 
     SQUARE(0),
     ROUNDED_SQUARE(1),
-    CIRCLE(2);
+    CIRCLE(2),
+    CUSTOM_RADIUS(3);
 
     private int id;
     Shape(int id) {
