@@ -13,7 +13,6 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.ColorUtils;
@@ -24,6 +23,8 @@ public class LetterIconView extends View {
     private Context ctx;
     private String[] colors; // list of colors which indexes the english alphabet.
 
+    private int defaultBackgroundColor = Color.parseColor("#DDDDDD");
+
     private RectF backgroundRect;
     private Paint backgroundPaint, textPaint;
     private int[] gradientColors;
@@ -32,7 +33,7 @@ public class LetterIconView extends View {
     // Declare Vars
     private Shape shape; // the shape of the icon. square, rounded_square or circle
     private float shapeCornerRadius; // the corner radius to use when the {@link LetterIconView#shape} is set to Shape.CUSTOM_RADIUS
-    private Integer backgroundColor; // the primary background color.
+    private Integer backgroundColor; // the primary background colorss
     private boolean isGradient; // if we should use gradient or not.
     private String letters = ""; // the letters. Will only show the first two letters if more provided.
 
@@ -87,6 +88,7 @@ public class LetterIconView extends View {
      */
     public LetterIconView letters(String letters, boolean capitalize) {
         changeLetters(letters, capitalize);
+        changeBackgroundColor(this.backgroundColor);
         invalidate();
         return this;
     }
@@ -112,17 +114,36 @@ public class LetterIconView extends View {
      *              If null, the shape background color will automatically be set according to the first letter, or it will use #DDDDDD (silver) if no letters are set.
      */
     public LetterIconView backgroundColor(@Nullable @ColorInt Integer color) {
+        this.changeBackgroundColor(color);
+        // Automatically adjust the letters color based on the new background color.
+        this.textPaint.setColor(autoTextColor());
+
+        invalidate();
+        return this;
+    }
+
+
+    private void changeBackgroundColor(@Nullable @ColorInt Integer color) {
         if (color == null) {
             // If no color is defined
             if (this.letters.isEmpty()) {
                 // Use a default color.
-                this.backgroundColor = Color.GRAY;
+                if (this.backgroundColor == null) {
+                    this.backgroundColor = defaultBackgroundColor;
+                }
 
             } else {
                 // Automatically choose a color according to the first letter.
                 int index = getIndexOfLetterFromAlphabet(this.letters);
-                String colorHex = this.colors[index];
-                this.backgroundColor = Color.parseColor(colorHex);
+
+                if (index != -1) {
+                    String colorHex = this.colors[index];
+                    this.backgroundColor = Color.parseColor(colorHex);
+
+                } else {
+                    // Use a default color.
+                    this.backgroundColor = defaultBackgroundColor;
+                }
             }
 
         } else {
@@ -131,17 +152,13 @@ public class LetterIconView extends View {
         }
 
         if (this.isGradient) {
-            this.gradientColors = new int[] {
+            this.gradientColors = new int[]{
                     lightenColor(this.backgroundColor),
                     this.backgroundColor,
             };
         }
 
-        // Automatically adjust the letters color based on the new background color.
-        this.textPaint.setColor(autoTextColor());
 
-        invalidate();
-        return this;
     }
 
 
@@ -202,29 +219,30 @@ public class LetterIconView extends View {
         // Setup the attributes.
         // Make sure that we only show a maximum of two letters.
         changeLetters(letters, true);
+        changeBackgroundColor(this.backgroundColor);
 
         // If no color is set, then use the color according to the first letter of the letters.
         // otherwise, use the color that was set.
-        if (this.backgroundColor == null) {
-            // If no color is defined
-            if (this.letters.isEmpty()) {
-                // Use a default color.
-                this.backgroundColor = Color.GRAY;
-
-            } else {
-                // Automatically choose a color according to the first letter.
-                int index = getIndexOfLetterFromAlphabet(this.letters);
-                String colorHex = this.colors[index];
-                this.backgroundColor = Color.parseColor(colorHex);
-            }
-        }
-
-        if (this.isGradient) {
-            this.gradientColors = new int[] {
-                    lightenColor(this.backgroundColor),
-                    this.backgroundColor,
-            };
-        }
+//        if (this.backgroundColor == null) {
+//            // If no color is defined
+//            if (this.letters.isEmpty()) {
+//                // Use a default color.
+//                this.backgroundColor = Color.GRAY;
+//
+//            } else {
+//                // Automatically choose a color according to the first letter.
+//                int index = getIndexOfLetterFromAlphabet(this.letters);
+//                String colorHex = this.colors[index];
+//                this.backgroundColor = Color.parseColor(colorHex);
+//            }
+//        }
+//
+//        if (this.isGradient) {
+//            this.gradientColors = new int[] {
+//                    lightenColor(this.backgroundColor),
+//                    this.backgroundColor,
+//            };
+//        }
 
 
         // Initialize Utils

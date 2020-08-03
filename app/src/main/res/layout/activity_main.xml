@@ -19,15 +19,12 @@
             android:id="@+id/letterIconView"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:layout_centerInParent="true"
-            app:liv_backgroundColor="#fff000"
-            app:liv_letters="🌮" />
+            android:layout_centerInParent="true" />
 
         <EditText
             android:id="@+id/et"
             android:layout_width="240dp"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content" />
 
 <!--        <com.kishannareshpal.lettericonview.LetterIconView-->
 <!--            android:layout_width="64dp"-->
