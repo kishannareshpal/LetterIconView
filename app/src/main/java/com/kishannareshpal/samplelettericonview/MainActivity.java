@@ -1,18 +1,14 @@
 package com.kishannareshpal.samplelettericonview;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
-import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.kishannareshpal.lettericonview.LetterIconView;
-import com.kishannareshpal.lettericonview.Shape;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
         et.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
@@ -49,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
                         letters.append(n.charAt(0));
                     }
                     letterIconView.letters(letters.toString());
+
+
 
                 } else {
                     letterIconView.letters(name);

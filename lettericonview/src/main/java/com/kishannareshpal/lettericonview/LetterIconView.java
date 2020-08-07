@@ -17,6 +17,10 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.ColorUtils;
 
+import java.time.format.TextStyle;
+
+import dev.jorgecastillo.androidcolorx.library.ColorIntExtensionsKt;
+
 public class LetterIconView extends View {
 
     // Declare Utils
@@ -34,6 +38,7 @@ public class LetterIconView extends View {
     private Shape shape; // the shape of the icon. square, rounded_square or circle
     private float shapeCornerRadius; // the corner radius to use when the {@link LetterIconView#shape} is set to Shape.CUSTOM_RADIUS
     private Integer backgroundColor; // the primary background colorss
+    private Integer textColor;
     private boolean isGradient; // if we should use gradient or not.
     private String letters = ""; // the letters. Will only show the first two letters if more provided.
 
@@ -74,6 +79,7 @@ public class LetterIconView extends View {
      */
     public LetterIconView letters(String letters) {
         changeLetters(letters, true);
+        changeBackgroundColor(null);
         invalidate();
         return this;
     }
@@ -90,6 +96,10 @@ public class LetterIconView extends View {
         changeLetters(letters, capitalize);
         changeBackgroundColor(this.backgroundColor);
         invalidate();
+        return this;
+    }
+
+    public LetterIconView lettersColor(@Nullable @ColorInt Integer color) {
         return this;
     }
 
@@ -115,9 +125,6 @@ public class LetterIconView extends View {
      */
     public LetterIconView backgroundColor(@Nullable @ColorInt Integer color) {
         this.changeBackgroundColor(color);
-        // Automatically adjust the letters color based on the new background color.
-        this.textPaint.setColor(autoTextColor());
-
         invalidate();
         return this;
     }
@@ -125,40 +132,46 @@ public class LetterIconView extends View {
 
     private void changeBackgroundColor(@Nullable @ColorInt Integer color) {
         if (color == null) {
-            // If no color is defined
+            // Depend on the letters.
             if (this.letters.isEmpty()) {
-                // Use a default color.
+                // When there are no letters:
                 if (this.backgroundColor == null) {
+                    // use the default grey background color.
                     this.backgroundColor = defaultBackgroundColor;
                 }
 
             } else {
-                // Automatically choose a color according to the first letter.
+                // Or automatically choose a color:
                 int index = getIndexOfLetterFromAlphabet(this.letters);
-
                 if (index != -1) {
+                    // If the first character is from the english alphabet, use the pre-defined color in it.
                     String colorHex = this.colors[index];
                     this.backgroundColor = Color.parseColor(colorHex);
 
                 } else {
-                    // Use a default color.
+                    // If the first character is not from an english alphabet, use the default grey background color.
                     this.backgroundColor = defaultBackgroundColor;
                 }
             }
 
         } else {
-            // Otherwise use the defined color here.
+            // Otherwise use the defined color.
             this.backgroundColor = color;
         }
 
+
+        // Adjust the gradient if needed.
         if (this.isGradient) {
             this.gradientColors = new int[]{
-                    lightenColor(this.backgroundColor),
+                    ColorIntExtensionsKt.lighten(this.backgroundColor, 10),
                     this.backgroundColor,
             };
         }
 
-
+        // Automatically adjust the letters color based on the new background color.
+        if (this.textPaint != null) {
+            this.textPaint.setColor(autoTextColor());
+        }
     }
 
 
@@ -178,32 +191,32 @@ public class LetterIconView extends View {
 
         // List of colors to match the alphabet.
         colors = new String[] {
-                "#832161", // A 0
-                "#f09ae9", // B 1
-                "#EA5B2E", // C 2
-                "#7B0828", // D 3
-                "#70F8BA", // E 4
-                "#F686BD", // F 5
-                "#BFEDC1", // G 6
-                "#7D1538", // H 7
-                "#B47AEA", // I 8
-                "#FAA381", // J 9
-                "#E63946", // K 10
-                "#634133", // L 11
-                "#F78764", // M 12
-                "#6E44FF", // N 13
-                "#0C8346", // O 14
-                "#CFB3CD", // P 15
-                "#CBBAED", // Q 16
-                "#F4E9CD", // R 17
-                "#2667FF", // S 18
-                "#3D0B37", // T 19
-                "#92DCE5", // U 20
-                "#ECCFC3", // V 21
-                "#36382E", // W 22
-                "#F8F272", // X 23
-                "#C6AD94", // Y 24
-                "#472D30", // Z 25
+                "#7effdb", // A 0
+                "#00e0ff", // B 1
+                "#10ddc2", // C 2
+                "#9870fc", // D 3
+                "#ff9de2", // E 4
+                "#f7f48b", // F 5
+                "#ea0599", // G 6
+                "#7a08fa", // H 7
+                "#fc3c3c", // I 8
+                "#2D7DD2", // J 9
+                "#fff200", // K 10
+                "#ffb5b5", // L 11
+                "#481380", // M 12
+                "#d4f8e8", // N 13
+                "#ba6b57", // O 14
+                "#23a393", // P 15
+                "#d6f8b8", // Q 16
+                "#09a8fa", // R 17
+                "#1333a6", // S 18
+                "#a21232", // T 19
+                "#fff3e1", // U 20
+                "#FF8C42", // V 21
+                "#04E762", // W 22
+                "#7AF8A6", // X 23
+                "#7051F4", // Y 24
+                "#C33024", // Z 25
         };
 
         // Grab the attributes values, if any was set.
@@ -296,37 +309,11 @@ public class LetterIconView extends View {
             cornerRadius = 0f;
 
         } else if (shape == Shape.CUSTOM_RADIUS) {
-            // se (fullwidth/2) fica redondo.
-            // entao ..... ???
-
-
-            // ao colocar cornerRadius = 100 deve ficar igual a redondo
-
-
-//            redondo estaPara 100
-//            x       estaPara cornerRadius
-//
-//
-//                    ahmmmmm jh sei.
-//
-//            x * 100 = redondo * cornerRadius
-//
-//
-//                    x = redondo * cornerRadius / 100
-//
-//                            num faz sentido
-//
-//                    fiz isso mas n aceitou.. vou tentar denovo
-//
-
-            float redondo = fullWidth / 2;
-            cornerRadius = redondo * this.shapeCornerRadius / 100;
-
-//            cornerRadius = this.shapeCornerRadius;
+            float fully_round = fullWidth / 2;
+            cornerRadius = fully_round * this.shapeCornerRadius / 100; // to make the roundness relative to percentage.
         }
 
         canvas.drawRoundRect(backgroundRect, cornerRadius, cornerRadius, backgroundPaint);
-
         textPaint.setTextSize(fullWidth/2f);
         canvas.drawText(letters, fullWidth/2f, (fullHeight/2f) - ((textPaint.descent() + textPaint.ascent()) / 2), textPaint);
     }
@@ -364,7 +351,7 @@ public class LetterIconView extends View {
         boolean isDark;
         if (isGradient) {
             // calculate the luminance of the lightest color.
-            int color = lightenColor(this.backgroundColor);
+            int color = ColorIntExtensionsKt.lighten(this.backgroundColor, 0.1f);
             isDark = isColorDark(color);
         } else {
             isDark = isColorDark(this.backgroundColor);
@@ -385,7 +372,7 @@ public class LetterIconView extends View {
      */
     private int getIndexOfLetterFromAlphabet(String letter) {
         String lowerCaseChar = letter.toLowerCase();
-        String alphabet = "abcdefghijklmnopqrstuvwxyz";
+        String alphabet = "abcdefghijklmnopqrstuvwxyz"; // english alphabet
         return alphabet.indexOf(lowerCaseChar.charAt(0));
     }
 
@@ -425,7 +412,7 @@ public class LetterIconView extends View {
     int lightenColor(@ColorInt int color) {
         float[] hsv = new float[3];
         Color.colorToHSV(color, hsv);
-        hsv[2] /= 0.8f;
+        hsv[2] /= 0.9f;
         return Color.HSVToColor(hsv);
     }
 }
