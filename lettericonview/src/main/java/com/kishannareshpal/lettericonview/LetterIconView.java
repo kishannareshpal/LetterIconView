@@ -38,7 +38,6 @@ public class LetterIconView extends View {
     private Shape shape; // the shape of the icon. square, rounded_square or circle
     private float shapeCornerRadius; // the corner radius to use when the {@link LetterIconView#shape} is set to Shape.CUSTOM_RADIUS
     private Integer backgroundColor; // the primary background colorss
-    private Integer textColor;
     private boolean isGradient; // if we should use gradient or not.
     private String letters = ""; // the letters. Will only show the first two letters if more provided.
 
@@ -96,10 +95,6 @@ public class LetterIconView extends View {
         changeLetters(letters, capitalize);
         changeBackgroundColor(this.backgroundColor);
         invalidate();
-        return this;
-    }
-
-    public LetterIconView lettersColor(@Nullable @ColorInt Integer color) {
         return this;
     }
 
@@ -309,7 +304,7 @@ public class LetterIconView extends View {
             cornerRadius = 0f;
 
         } else if (shape == Shape.CUSTOM_RADIUS) {
-            float fully_round = fullWidth / 2;
+            float fully_round = fullWidth / 2f;
             cornerRadius = fully_round * this.shapeCornerRadius / 100; // to make the roundness relative to percentage.
         }
 
