@@ -10,14 +10,13 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.ColorUtils;
-
-import java.time.format.TextStyle;
 
 import dev.jorgecastillo.androidcolorx.library.ColorIntExtensionsKt;
 
@@ -37,7 +36,8 @@ public class LetterIconView extends View {
     // Declare Vars
     private Shape shape; // the shape of the icon. square, rounded_square or circle
     private float shapeCornerRadius; // the corner radius to use when the {@link LetterIconView#shape} is set to Shape.CUSTOM_RADIUS
-    private Integer backgroundColor; // the primary background colorss
+    private Integer backgroundColor; // the primary background colors
+    private boolean isUsingCustomBackgroundColor;
     private boolean isGradient; // if we should use gradient or not.
     private String letters = ""; // the letters. Will only show the first two letters if more provided.
 
@@ -78,7 +78,8 @@ public class LetterIconView extends View {
      */
     public LetterIconView letters(String letters) {
         changeLetters(letters, true);
-        changeBackgroundColor(null);
+        changeBackgroundColor(this.backgroundColor);
+//        changeBackgroundColor(this.backgroundColor);
         invalidate();
         return this;
     }
@@ -119,37 +120,44 @@ public class LetterIconView extends View {
      *              If null, the shape background color will automatically be set according to the first letter, or it will use #DDDDDD (silver) if no letters are set.
      */
     public LetterIconView backgroundColor(@Nullable @ColorInt Integer color) {
-        this.changeBackgroundColor(color);
+        this.isUsingCustomBackgroundColor = color != null;
+        changeBackgroundColor(color);
         invalidate();
         return this;
     }
 
 
     private void changeBackgroundColor(@Nullable @ColorInt Integer color) {
-        if (color == null) {
+        if (color == null || color == defaultBackgroundColor) {
             // Depend on the letters.
-            if (this.letters.isEmpty()) {
+            if (this.letters == null || this.letters.isEmpty()) {
+                Log.v("logg", "1");
                 // When there are no letters:
                 if (this.backgroundColor == null) {
                     // use the default grey background color.
+                    Log.v("logg", "2");
                     this.backgroundColor = defaultBackgroundColor;
                 }
 
             } else {
+                Log.v("logg", "3");
                 // Or automatically choose a color:
                 int index = getIndexOfLetterFromAlphabet(this.letters);
                 if (index != -1) {
+                    Log.v("logg", "4");
                     // If the first character is from the english alphabet, use the pre-defined color in it.
                     String colorHex = this.colors[index];
                     this.backgroundColor = Color.parseColor(colorHex);
 
                 } else {
+                    Log.v("logg", "5");
                     // If the first character is not from an english alphabet, use the default grey background color.
                     this.backgroundColor = defaultBackgroundColor;
                 }
             }
 
         } else {
+            Log.v("logg", "6");
             // Otherwise use the defined color.
             this.backgroundColor = color;
         }
@@ -320,9 +328,10 @@ public class LetterIconView extends View {
     /** Private Methods **/
     private void changeLetters(String l, boolean capitalize) {
         this.letters = l;
-        if (l == null) {
+        if (l == null || l.isEmpty()) {
             // If letters are null, than initialize it as empty
             this.letters = "";
+            if (!isUsingCustomBackgroundColor) this.backgroundColor = null;
             return;
         }
 
@@ -395,19 +404,5 @@ public class LetterIconView extends View {
             retStr = str.substring(0, 1).toUpperCase() + str.substring(1);
         }catch (Exception ignored){ }
         return retStr;
-    }
-
-
-    /**
-     * Returns a lighter version of the provided color.
-     * @param color the color you want the lighter version of.
-     * @return a lighter color from the provided.
-     */
-    @ColorInt
-    int lightenColor(@ColorInt int color) {
-        float[] hsv = new float[3];
-        Color.colorToHSV(color, hsv);
-        hsv[2] /= 0.9f;
-        return Color.HSVToColor(hsv);
     }
 }
